@@ -9,20 +9,22 @@ function Egg($chickenDiv)
     // of future egg objects
     // position: https://api.jquery.com/position/
     //Set vị trí cho trứng rơi
-    this.chickenDivPosition = $chickenDiv.offset();
-    this.startPosLeft       = this.chickenDivPosition.left + $chickenDiv.width() / 2 - 20;
-    this.startPosTop        = this.chickenDivPosition.top + $chickenDiv.height() - 30;
+    this.chickenDivPosition = $chickenDiv.position();
+    this.startPosLeft       = this.chickenDivPosition.left + $chickenDiv.width() / 2-17;
+    this.startPosTop        = this.chickenDivPosition.top + $chickenDiv.height() - 50;
+
 
 
     // create div in memory to hold egg image
     // set width, height and background via class egg in egg_style.css
     // set left and top position via input parameters
-    this.$eggImageDiv = $("<div></div>").attr("class", "egg").css("left", this.startPosLeft).css("top", this.startPosTop);
+    this.$eggImageDiv = $("<div></div>").attr("class", "egg").css({"left": this.startPosLeft,"top" : this.startPosTop});
 
     $chickenDiv.append(this.$eggImageDiv);
     // calculate distance of egg fall by subtracting it's position from the window
     var basket            = new Basket();
-    this.distanceToBasket = basket.basketTop;
+    //Khoảng cách từ giỏ tới con gà, tăng giảm để set vị trí khi hứng trứng
+    this.distanceToBasket = basket.basketTop-13;
 
     //create function startFall to animate egg drop and find out the height
     // of the window and myltipy by to 10 to control speed.
@@ -53,14 +55,13 @@ function Egg($chickenDiv)
             // $(this).fadeOut('slow', function(){$(this).remove();});
             var $eggDiv      = $(this);
             // $eggDiv.css('border', '20px solid purple');
-            var $eggPosition = $eggDiv.offset();
+            var $eggPosition = $eggDiv.position();
 
             var basket      = new Basket();
             var basketRight = basket.basketRight;
             var basketLeft  = basket.basketLeft;
             var eggLeft     = $eggPosition.left;
             var eggRight    = $eggPosition.left + $eggDiv.width();
-            console.log(basketRight,eggRight,"bắt");
             var isCatched = basketRight > eggRight && basketLeft < eggLeft;
 
             if (isCatched)
@@ -80,7 +81,6 @@ function Egg($chickenDiv)
             {
                 eggObject.missedEgg();
             }
-            chickensStartHatch();
         }
     };
 
@@ -88,7 +88,7 @@ function Egg($chickenDiv)
     this.missedEgg = function ()
     {
         var $egg = eggObject.$eggImageDiv;
-        $egg.animate({top: window.innerHeight - $egg.height()}, 1000, "linear", eggObject.breakEgg);
+        $egg.animate({top: scope.$basket.position().top+scope.$basket.height()-$egg.height()}, 500, "linear", eggObject.breakEgg);
         scope.life = (--scope.life < 0) ? 0 : scope.life;
     };
 
@@ -104,10 +104,34 @@ function Egg($chickenDiv)
         {
             $("div.egg").remove();
             alert("Chúc mừng, bạn đã được "+scope.score+" điểm!");
+            // $.ajax({
+            //     headers: {
+            //         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     url: "http://localhost:2750/saveScore",
+            //     type: 'POST',
+            //     data:{arrId:arrId,arrOldImage:arrOldImage},
+            //     beforeSend: function(){
+            //         if(_isLoading==0){
+            //             _isLoading = 1;
+            //         }else{
+            //             notify(_error, 'error',_messageLoading, '#AA3131', '#792A2A');
+            //             return false;
+            //         }
+            //     },
+            //     success: function success(data) {
+            //         if(data.status == _statusOK){
+            //             toastr.success(data.message, '',{timeOut: 2000});
+            //             // window.location.reload();
+            //         }else{
+            //             notify(_error, 'error',data.message, '#AA3131', '#792A2A');
+            //         }
+            //     },
+            //     error: function error(xhr, ajaxOptions, thrownError) {
+            //         console.log('Error ' + xhr.status + ' | ' + thrownError);
+            //     }
+            // });
         }
-        // $(document.location).attr('href','egg_game_pg_1.html?score=' + score + '&player=' + player);
-
-
     };
 
 
