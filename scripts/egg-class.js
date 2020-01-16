@@ -24,13 +24,14 @@ function Egg($chickenDiv)
     // calculate distance of egg fall by subtracting it's position from the window
     var basket            = new Basket();
     //Khoảng cách từ giỏ tới con gà, tăng giảm để set vị trí khi hứng trứng
-    this.distanceToBasket = basket.basketTop-13;
+    this.distanceToBasket = basket.basketTop-$("div.egg").height()/3;
 
     //create function startFall to animate egg drop and find out the height
     // of the window and myltipy by to 10 to control speed.
     // this.breakEgg is a callback function that will called after
     // egg animation is complete
-    var milliSeconds = window.innerHeight * (scope.speed - scope.level);
+    var milliSeconds = (window.innerHeight*scope.speed - scope.level*500);
+    // var milliSeconds = (2500 - scope.level*400);
 
     //capture 'this' into separate variable to use it for
     // further calcution. 'this' will change its meaning inside
@@ -71,16 +72,28 @@ function Egg($chickenDiv)
                 let current_level = scope.score % scope.score_per_lever;
                 if(current_level == 0){
                     if(scope.level < scope.level_max){
-                        scope.level++;
+                        scope.level+= 0.5;
                     }else{
                         scope.level = scope.level_max;
                     }
                 }
                 $("div.score").text(scope.score);
-            } else
-            {
+            } else {
                 eggObject.missedEgg();
             }
+            // let random_index    = Math.floor(Math.random() * $("div.chicken").length);
+            // let $eachChickenDiv = $($("div.chicken")[random_index]);
+            // console.log($eachChickenDiv,random_index);
+            // // var $eachChickenDiv    =
+            // // $($(scope.$allChickens)[Math.floor(Math.random()*scope.$allChickens.length)]);
+            // // create object chicken object from Chicken class
+            // let $eachChickenObject = new Chicken($eachChickenDiv);
+            // // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
+            // window.setTimeout(function ()
+            //                   {
+            //                       $eachChickenObject.hatchEggs();
+            //                   }, (random_index + 1) * 3000
+            // );
         }
     };
 

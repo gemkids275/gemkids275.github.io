@@ -47,16 +47,17 @@ function onLoad()
     //Level lúc đầu
     scope.level            = 1;
     //Level max
-    scope.level_max        = 5;
+    scope.level_max        = 4;
     //Tốc độ(milliseconds)
-    scope.speed            = 10;
+    scope.speed            = 3;
     //Vị trí con trỏ trên cái giỏ
     scope.pointer_position = scope.basket_width / 2;
+    scope.first = 3000;
     //Position của phần tử cha
     scope.parentRect       = $("div.game")[0].getBoundingClientRect();
     scope.parentRectLeft   = $("div.chick-1")[0].getBoundingClientRect().left;
     scope.parentRectRight  = $("div.chick-3")[0].getBoundingClientRect().right;
-    scope.middleXPoint = $("div.chick-2")[0].getBoundingClientRect().left + $("div.chick-2")[0].getBoundingClientRect().width / 2;
+    // scope.middleXPoint     = $("div.chick-2")[0].getBoundingClientRect().left + $("div.chick-2")[0].getBoundingClientRect().width / 2;
     //Set life
     for (i = 1; i <= scope.life; i++)
     {

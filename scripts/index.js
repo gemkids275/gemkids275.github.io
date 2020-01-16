@@ -1,51 +1,65 @@
-function renderMenu() {
-    const div = document.createElement('div');
-    const img = document.getElementById('backgroundImg');
-    let top = img.clientHeight * 0.5;
-    let left = img.clientWidth * 0.5;
-    console.log(img.clientWidth)
-    console.log(img.clientHeight)
-    div.className = 'menu';
-    div.id = 'menu';
-    div.style.height = '30vh';
-    div.style.width = '30vw';
-    div.style.position = 'fixed';
-    div.style.display = 'flex';
-    div.style.flexDirection = 'column';
-    div.style.zIndex = '10000';
-    div.innerHTML = `
-        <div class="menu-item">
-            A
-        </div>
-        <div class="menu-item">
-            A
-        </div>
-        <div class="menu-item">
-            A
-        </div>
-  `;
-    div.style.top = (top - vh(15)) + 'px';
-    div.style.left = (left - vw(15)) + 'px';
-    document.getElementById('appWrapper').appendChild(div);
+function checkLogin (e) {
+    let phone = localStorage.getItem('currentUserPhone');
+    if (!phone) {
+        $.confirm({
+            title: 'Thông tin người chơi',
+            content: '' +
+                '<form action="" class="formName">' +
+                '<div class="form-group">' +
+                '<label>Họ và tên</label>' +
+                '<input type="text" placeholder="Nhập tên" class="name-input form-control" required />' +
+                '<label>Số điện thoại</label>' +
+                '<input type="text" placeholder="Nhập số điện thoại" class="phone-input form-control" required />' +
+                '</div>' +
+                '</form>',
+            buttons: {
+                formSubmit: {
+                    text: 'Chơi',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        let name = this.$content.find('.name-input').val();
+                        let phone = this.$content.find('.phone-input').val();
+                        if(!name){
+                            $.alert('Yêu cầu nhập tên để chơi');
+                            return false;
+                        }
+                        if (!phone.match(/^[0-9]{10,11}$/g)) {
+                            $.alert('Số điện thoại không đúng định dạng');
+                            return false;
+                        }
+                        localStorage.setItem('phone', phone);
+                        localStorage.setItem('name', name);
+                        let href = window.location.href;
+                        href = href.replace('index.', 'game_pg_2.');
+                        window.location.href = href
+                    }
+                },
+                cancel: {
+                    text: 'Hủy',
+                    btnClass: 'btn-red',
+                    action: function () {
+                    }
+                },
+            },
+            // onContentReady: function () {
+            //     // bind to events
+            //     var jc = this;
+            //     this.$content.find('form').on('submit', function (e) {
+            //         // if the user submits the form by pressing enter in the field.
+            //         e.preventDefault();
+            //         jc.$$formSubmit.trigger('click'); // reference the button and click it
+            //     });
+            // }
+        });
+    }
+    else {
+        let href = window.location.href;
+        href = href.replace('index.', 'game_pg_2.');
+        console.log(href);
+        window.location.replace(href)
+    }
 }
 
-function updateMenuOnResize() {
-    const img = document.getElementById('backgroundImg');
-    const div = document.getElementById('menu');
-    let top = img.clientHeight * 0.5;
-    let left = img.clientWidth * 0.5;
-    div.style.top = (top - vh(15)) + 'px';
-    div.style.left = (left - vw(15)) + 'px';
-    console.log(img.clientWidth)
-    console.log(img.clientHeight)
-}
-
-function vh(v) {
-    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    return (v * h) / 100;
-}
-
-function vw(v) {
-    let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    return (v * w) / 100;
+function getCurrentUserPhoneNumber() {
+    return localStorage.getItem('currentUserPhone')
 }
