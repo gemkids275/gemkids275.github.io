@@ -15,6 +15,9 @@ html, body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
+.landscape{
+  display: none;
+}
 .dis-none{
   display: none;
 }
@@ -375,6 +378,18 @@ table.score-table td {
         width             : 150px;
         height            : 75px;
       }
+    }
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-height: 300px) {
+  div.row-container{
+    .landscape{
+      display : block;
+    }
+    .game{
+      display: none;
     }
   }
 }
