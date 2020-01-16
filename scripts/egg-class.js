@@ -81,19 +81,7 @@ function Egg($chickenDiv)
             } else {
                 eggObject.missedEgg();
             }
-            // let random_index    = Math.floor(Math.random() * $("div.chicken").length);
-            // let $eachChickenDiv = $($("div.chicken")[random_index]);
-            // console.log($eachChickenDiv,random_index);
-            // // var $eachChickenDiv    =
-            // // $($(scope.$allChickens)[Math.floor(Math.random()*scope.$allChickens.length)]);
-            // // create object chicken object from Chicken class
-            // let $eachChickenObject = new Chicken($eachChickenDiv);
-            // // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
-            // window.setTimeout(function ()
-            //                   {
-            //                       $eachChickenObject.hatchEggs();
-            //                   }, (random_index + 1) * 3000
-            // );
+            setNextEgg();
         }
     };
 
@@ -165,7 +153,31 @@ $.urlParam = function (name)
     }
     return unescape(results[1]) || undefined;
 };
-
+function setNextEgg() {
+    let random_index    = Math.floor(Math.random() * $("div.chicken").length);
+    let $eachChickenDiv = $($("div.chicken")[random_index]);
+    var now = Date.now();
+    if(scope.previous_time == 0){
+        scope.previous_time       = now;
+    }
+    var nextEggTime = getRandomInt(500,2000);
+    let timeFromLastEgg = now - scope.previous_time;
+    if(timeFromLastEgg + nextEggTime < 1500 ){
+        console.log("vào");
+        nextEggTime = (timeFromLastEgg < 0)?500 - timeFromLastEgg : timeFromLastEgg;
+    }
+    let $eachChickenObject = new Chicken($eachChickenDiv);
+    window.setTimeout(function ()
+        {
+            $eachChickenObject.hatchEggs();
+        },  nextEggTime
+    );
+    scope.previous_time = Date.now() + nextEggTime;
+}
+function getRandomInt(min, max)
+{
+    return Math.floor(Math.random() * max) + min;
+}
 
 
 

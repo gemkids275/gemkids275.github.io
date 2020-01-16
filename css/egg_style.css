@@ -279,9 +279,9 @@ table.score-table td {
     right: 52px;
     top: 19%; }
   div.row-container div.life-left {
-    left: 8%; }
+    left: 5vw; }
   div.row-container div.life-right {
-    right: 6%; }
+    right: 2vw; }
   div.row-container .game-container div.game-box-flex {
     justify-content: space-around; }
   div.row-container .game-container div.basket {
@@ -294,20 +294,24 @@ table.score-table td {
     div.row-container .game-container div.chicken div.egg {
       width: 45px;
       height: 60px; } }
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-height: 500px) {
+  div.row-container div.score {
+    font-size: 30px;
+    right: -40px;
+    top: 16%; }
+  div.row-container div.life-left {
+    left: 1vw; } }
 /* Large devices (laptops/desktops, 992px and up) */
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  div.row-container div.life-right {
+    right: 3vw; }
   div.row-container div.game-container div.chicken {
     width: 120px;
     height: 120px; }
   div.row-container div.game-container div.basket {
     width: 150px;
     height: 75px; } }
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (max-height: 300px) {
-  div.row-container .landscape {
-    display: block; }
-  div.row-container .game {
-    display: none; } }
 
 /*# sourceMappingURL=egg_style.css.map */

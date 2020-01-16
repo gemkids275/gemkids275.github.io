@@ -28,6 +28,7 @@ $(document).on("click", "#play", function (e)
 function onLoad()
 {
     let i;
+    scope.previous_time = 0;
     scope.$container       = $("div.game");
     scope.$basket          = $("div.basket");
     scope.$allChickens     = $("div.chicken");
@@ -52,7 +53,6 @@ function onLoad()
     scope.speed            = 3;
     //Vị trí con trỏ trên cái giỏ
     scope.pointer_position = scope.basket_width / 2;
-    scope.first = 3000;
     //Position của phần tử cha
     scope.parentRect       = $("div.game")[0].getBoundingClientRect();
     scope.parentRectLeft   = $("div.chick-1")[0].getBoundingClientRect().left;
@@ -64,7 +64,7 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    // window.setTimeout(chickensStartHatch, 100);
+    window.setTimeout(chickensStartHatch, 100);
 };
 //add mouse over event to move basket
 $("div.game").on("mousemove", function (e)

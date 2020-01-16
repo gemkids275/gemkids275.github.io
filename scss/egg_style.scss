@@ -337,10 +337,10 @@ table.score-table td {
       top       : 19%;
     }
     div.life-left{
-      left: 8%;
+      left: 5vw;
     }
     div.life-right{
-      right : 6%;
+      right : 2vw;
     }
     .game-container{
       div.game-box-flex{
@@ -363,12 +363,29 @@ table.score-table td {
   }
 }
 
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-height: 500px) {
+  div.row-container {
+    div.score {
+      font-size : 30px;
+      right     : -40px;
+      top       : 16%;
+    }
+
+    div.life-left {
+      left : 1vw;
+    }
+  }
+}
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   div.row-container{
+    div.life-right {
+      right : 3vw;
+    }
     div.game-container{
       div.chicken{
         width: 120px;
@@ -382,17 +399,6 @@ table.score-table td {
   }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (max-height: 300px) {
-  div.row-container{
-    .landscape{
-      display : block;
-    }
-    .game{
-      display: none;
-    }
-  }
-}
 
 
 

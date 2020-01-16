@@ -36,10 +36,10 @@ function Chicken($chickenDiv)
             this.nextEgg.startFall();
             // calculate period when next egg will start falling in milliseconds
             // var nextEggTime = getRandomInt(time, time+(6-scope.level)*1000);
-            var nextEggTime = getRandomInt((6-scope.level)*1000, 2000);
-            console.log(nextEggTime);
-            // credit for bind this http://.com/questions/5911211/settimeout-inside-javascript-class-using-this
-            window.setTimeout(this.hatchEggs.bind(this), nextEggTime)
+            // var nextEggTime = getRandomInt((6-scope.level)*1000, 2000);
+            // console.log(nextEggTime);
+            // // credit for bind this http://.com/questions/5911211/settimeout-inside-javascript-class-using-this
+            // window.setTimeout(this.hatchEggs.bind(this), nextEggTime);
         }
     };
 
