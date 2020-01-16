@@ -163,8 +163,7 @@ function setNextEgg() {
     var nextEggTime = getRandomInt(500,2000);
     let timeFromLastEgg = now - scope.previous_time;
     if(timeFromLastEgg + nextEggTime < 1500 ){
-        console.log("vào");
-        nextEggTime = (timeFromLastEgg < 0)?800 - timeFromLastEgg : timeFromLastEgg;
+        nextEggTime = (timeFromLastEgg < 0)?1000 - timeFromLastEgg : timeFromLastEgg;
     }
     let $eachChickenObject = new Chicken($eachChickenDiv);
     window.setTimeout(function ()
