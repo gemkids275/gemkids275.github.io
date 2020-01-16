@@ -2,7 +2,8 @@ html, body {
   background-color: #169A82;
   width: 100%;
   height: 100%;
-  margin: 0; }
+  margin: 0;
+  overflow: hidden; }
 
 .dis-none {
   display: none; }
@@ -11,7 +12,9 @@ html, body {
   margin: 0px; }
 
 .row-container {
-  height: 100%; }
+  display: flex;
+  height: 100%;
+  justify-content: center; }
 
 .m-t-10 {
   margin-top: 10px; }

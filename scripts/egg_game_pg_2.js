@@ -64,7 +64,7 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    window.setTimeout(chickensStartHatch, 100);
+    // window.setTimeout(chickensStartHatch, 100);
 };
 //add mouse over event to move basket
 $("div.game").on("mousemove", function (e)
