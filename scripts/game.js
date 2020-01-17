@@ -8,8 +8,9 @@ var scope = {};
 function onLoad()
 {
     let i;
-    let phone = localStorage.getItem('phone');
-    scope.previous_time = 0;
+    scope.user             = getStorage("user");
+    scope.user.score       = (scope.user.score == null)? 0: scope.user.score;
+    scope.previous_time    = 0;
     scope.$container       = $("div.game");
     scope.$basket          = $("div.basket");
     scope.$allChickens     = $("div.chicken");
@@ -44,8 +45,8 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    if(phone != null ) {
-        if(!phone.match(/^\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4,5})$/g)) {
+    if(scope.user.phone != null ) {
+        if(!scope.user.phone.match(/^[0-9]{10}$/g)) {
             $.confirm({
                 title: 'Chú ý !',
                 content: 'Số điện thoại không đúng định dạng!',
@@ -57,7 +58,7 @@ function onLoad()
                         text: 'OK',
                         action : function () {
                             localStorage.clear();
-                            backToHome();
+                            redirectToHome();
                         }
                     }
                 }
@@ -77,7 +78,7 @@ function onLoad()
                     text: 'OK',
                     action : function () {
                         localStorage.clear();
-                        backToHome();
+                        redirectToHome();
                     }
                 }
             }
@@ -140,10 +141,3 @@ function chickensStartHatch()
                             });
 
 }
-
-function backToHome() {
-    let href                = window.location.href;
-    href                    = href.replace('game.', 'index.');
-    window.location.href    = href
-}
-

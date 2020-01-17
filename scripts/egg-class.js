@@ -72,7 +72,6 @@ function Egg($chickenDiv)
     {
         var $egg = eggObject.$eggImageDiv;
         $egg.animate({top: scope.$basket.position().top+scope.$basket.height()-$egg.height()}, 500, "linear", eggObject.breakEgg);
-        scope.life = (--scope.life < 0) ? 0 : scope.life;
     };
 
     this.breakEgg = function ()
@@ -82,9 +81,33 @@ function Egg($chickenDiv)
         $($divLife).remove();
         //remove trứng đã rơi
         $(this).remove();
-        if (scope.life <= 0)
+        scope.life--;
+        if (scope.life == 0)
         {
             $("div.egg").remove();
+            if(scope.score > parseInt(scope.user.score)){
+                $.ajax({
+                    headers: {
+                        // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: 'https://order.hoanghamobile.com/api/gamea51/user',
+                    type: 'POST',
+                    processData: false,
+                    contentType: 'application/json',
+                    data: JSON.stringify(scope.user),
+                    success: function success(data) {
+                        if(data.success == true){
+                            scope.user.score = scope.score;
+                            setStorage("user",scope.user);
+                        } else {
+                            console.log('Error- '+ data.message);
+                        }
+                    },
+                    error: function error(xhr, ajaxOptions, thrownError) {
+                        console.log('Error ' + xhr.status + ' | ' + thrownError);
+                    }
+                });
+            }
             $.confirm({
                 title: 'Chúc mừng',
                 content: 'Bạn đã được ' + scope.score + ' điểm!',
@@ -102,70 +125,16 @@ function Egg($chickenDiv)
                     close: {
                         text: 'Kết thúc',
                         action : function () {
-                            backToHome();
+                            redirectToHome();
                         }
                     }
                     }
             });
-            // $.ajax({
-            //     headers: {
-            //         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     url: "http://localhost:2750/saveScore",
-            //     type: 'POST',
-            //     data:{arrId:arrId,arrOldImage:arrOldImage},
-            //     beforeSend: function(){
-            //         if(_isLoading==0){
-            //             _isLoading = 1;
-            //         }else{
-            //             notify(_error, 'error',_messageLoading, '#AA3131', '#792A2A');
-            //             return false;
-            //         }
-            //     },
-            //     success: function success(data) {
-            //         if(data.status == _statusOK){
-            //             toastr.success(data.message, '',{timeOut: 2000});
-            //             // window.location.reload();
-            //         }else{
-            //             notify(_error, 'error',data.message, '#AA3131', '#792A2A');
-            //         }
-            //     },
-            //     error: function error(xhr, ajaxOptions, thrownError) {
-            //         console.log('Error ' + xhr.status + ' | ' + thrownError);
-            //     }
-            // });
         }
     };
 
 
 };
-
-function setNextEgg() {
-    let random_index    = Math.floor(Math.random() * $("div.chicken").length);
-    let $eachChickenDiv = $($("div.chicken")[random_index]);
-    var now = Date.now();
-    if(scope.previous_time == 0){
-        scope.previous_time       = now;
-    }
-    var nextEggTime = getRandomInt(500,2000);
-    let timeFromLastEgg = now - scope.previous_time;
-    if(timeFromLastEgg + nextEggTime < 1500 ){
-        nextEggTime = (timeFromLastEgg < 0)?1000 - timeFromLastEgg : timeFromLastEgg;
-    }
-    console.log(nextEggTime);
-    let $eachChickenObject = new Chicken($eachChickenDiv);
-    window.setTimeout(function ()
-        {
-            $eachChickenObject.hatchEggs();
-        },  nextEggTime
-    );
-    scope.previous_time = Date.now() + nextEggTime;
-}
-
-function getRandomInt(min, max)
-{
-    return Math.floor(Math.random() * max) + min;
-}
 
 
 

@@ -115,7 +115,7 @@ body {
     margin-bottom: 10px;
     text-transform: uppercase;
     text-align: center;
-    color: #ffff00;
+    color: #ffff00 !important;
     text-decoration: none;
 }
 a:hover, a:active {
