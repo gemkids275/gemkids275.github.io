@@ -1,13 +1,5 @@
-// Create Egg Class in a separate js files as a prototype
-// for mulitple eggs
-
-// Create Class Egg with parameter $chickenDiv
-// because I need to know where to create the egg div.
 function Egg($chickenDiv)
 {
-    // this. is used to point to individual object
-    // of future egg objects
-    // position: https://api.jquery.com/position/
     //Set vị trí cho trứng rơi
     this.chickenDivPosition = $chickenDiv.position();
     this.startPosLeft       = this.chickenDivPosition.left + $chickenDiv.width() / 2-17;
@@ -22,7 +14,7 @@ function Egg($chickenDiv)
 
     $chickenDiv.append(this.$eggImageDiv);
     // calculate distance of egg fall by subtracting it's position from the window
-    var basket            = new Basket();
+    let basket            = new Basket();
     //Khoảng cách từ giỏ tới con gà, tăng giảm để set vị trí khi hứng trứng
     this.distanceToBasket = basket.basketTop-$("div.egg").height()/3;
 
@@ -30,14 +22,8 @@ function Egg($chickenDiv)
     // of the window and myltipy by to 10 to control speed.
     // this.breakEgg is a callback function that will called after
     // egg animation is complete
-    var milliSeconds = (window.innerHeight*scope.speed - scope.level*500);
+    let milliSeconds = (window.innerHeight*scope.speed - scope.level*500);
     // var milliSeconds = (2500 - scope.level*400);
-
-    //capture 'this' into separate variable to use it for
-    // further calcution. 'this' will change its meaning inside
-    // local functions and loops therefore we need to capture it in
-    // a separate variabe. Credit for 'var basketObject = 'this' goes to:
-    // http://stackoverflow.com/questions/520019/controlling-the-value-of-this-in-a-jquery-event
 
     var eggObject = this;
 
@@ -53,17 +39,14 @@ function Egg($chickenDiv)
     this.catchEgg = function ()
     {
         if(scope.life>0){
-            // $(this).fadeOut('slow', function(){$(this).remove();});
             var $eggDiv      = $(this);
-            // $eggDiv.css('border', '20px solid purple');
             var $eggPosition = $eggDiv.position();
-
-            var basket      = new Basket();
-            var basketRight = basket.basketRight;
-            var basketLeft  = basket.basketLeft;
-            var eggLeft     = $eggPosition.left;
-            var eggRight    = $eggPosition.left + $eggDiv.width();
-            var isCatched = basketRight > eggRight && basketLeft < eggLeft;
+            var basket       = new Basket();
+            var basketRight  = basket.basketRight;
+            var basketLeft   = basket.basketLeft;
+            var eggLeft      = $eggPosition.left;
+            var eggRight     = $eggPosition.left + $eggDiv.width();
+            var isCatched    = basketRight > eggRight && basketLeft < eggLeft;
 
             if (isCatched)
             {
@@ -81,7 +64,6 @@ function Egg($chickenDiv)
             } else {
                 eggObject.missedEgg();
             }
-            setNextEgg();
         }
     };
 
@@ -95,7 +77,6 @@ function Egg($chickenDiv)
 
     this.breakEgg = function ()
     {
-        var player   = $.urlParam("player");
         //Lấy ra div life đầu tiên để remove
         let $divLife = $(scope.$lifeContainer).find(">:first-child");
         $($divLife).remove();
@@ -104,7 +85,28 @@ function Egg($chickenDiv)
         if (scope.life <= 0)
         {
             $("div.egg").remove();
-            alert("Chúc mừng, bạn đã được "+scope.score+" điểm!");
+            $.confirm({
+                title: 'Chúc mừng',
+                content: 'Bạn đã được ' + scope.score + ' điểm!',
+                type: 'red',
+                columnClass: 'col-md-5 col-sm-12',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        text: 'Chơi lại',
+                        btnClass: 'btn-red',
+                        action: function(){
+                            window.location.reload();
+                        }
+                    },
+                    close: {
+                        text: 'Kết thúc',
+                        action : function () {
+                            backToHome();
+                        }
+                    }
+                    }
+            });
             // $.ajax({
             //     headers: {
             //         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -138,21 +140,6 @@ function Egg($chickenDiv)
 
 };
 
-
-// plugin function from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/
-
-$.urlParam = function (name)
-{
-
-    url = window.location.href;
-
-    var results = new RegExp("[\\?&]" + name + "=([^&#]*)").exec(url);
-    if (!results)
-    {
-        return undefined;
-    }
-    return unescape(results[1]) || undefined;
-};
 function setNextEgg() {
     let random_index    = Math.floor(Math.random() * $("div.chicken").length);
     let $eachChickenDiv = $($("div.chicken")[random_index]);
@@ -165,6 +152,7 @@ function setNextEgg() {
     if(timeFromLastEgg + nextEggTime < 1500 ){
         nextEggTime = (timeFromLastEgg < 0)?1000 - timeFromLastEgg : timeFromLastEgg;
     }
+    console.log(nextEggTime);
     let $eachChickenObject = new Chicken($eachChickenDiv);
     window.setTimeout(function ()
         {
@@ -173,6 +161,7 @@ function setNextEgg() {
     );
     scope.previous_time = Date.now() + nextEggTime;
 }
+
 function getRandomInt(min, max)
 {
     return Math.floor(Math.random() * max) + min;

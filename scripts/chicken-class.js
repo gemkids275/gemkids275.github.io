@@ -1,29 +1,3 @@
-// Download DOM before running jQuery script
-// $(document).ready(onLoad);
-
-// var scope = {};
-// text function to test creation of new egg
-function onLoad()
-{
-
-
-    // calling testFirstChicken function in 1 second after DOM loads
-    // setTimeout() is used to start function after 1 second
-    // window.setTimeout(testFirstChicken, 1000);
-
-    // function testFirstChicken(){
-    //  // getting first chicken div from the DOM
-    //  var $firstChickenDiv = $('div.chicken').first();
-    //  // creating firstChicken object from Class Chicken, and passing $firstChickenDiv
-    //  // as a parameter
-    //  var firstChicken = new Chicken($firstChickenDiv);
-    //  // calling function hatchEggs
-    //  firstChicken.hatchEggs();
-    // }
-
-
-}
-
 // creat Chicken Class with parameter $chickenDiv
 function Chicken($chickenDiv)
 {
@@ -31,22 +5,20 @@ function Chicken($chickenDiv)
     this.hatchEggs = function ()
     {
         if(scope.life>0){
-            this.nextEgg = new Egg($chickenDiv);
+            let random_index    = Math.floor(Math.random() * $("div.chicken").length);
+            let $eachChickenDiv = $($("div.chicken")[random_index]);
+            this.nextEgg        = new Egg($eachChickenDiv);
+            let nextEggTime     = 3500;
             // calling function startFall of nextEgg object
             this.nextEgg.startFall();
-            // calculate period when next egg will start falling in milliseconds
+            //calculate period when next egg will start falling in milliseconds
             // var nextEggTime = getRandomInt(time, time+(6-scope.level)*1000);
-            // var nextEggTime = getRandomInt((6-scope.level)*1000, 2000);
-            // console.log(nextEggTime);
-            // // credit for bind this http://.com/questions/5911211/settimeout-inside-javascript-class-using-this
-            // window.setTimeout(this.hatchEggs.bind(this), nextEggTime);
+            window.setTimeout(this.hatchEggs.bind(this), nextEggTime);
         }
     };
 
 
 }
-
-// getRandomInt function credit: https://gist.github.com/kerimdzhanov/7529623
 
 function getRandomInt(min, max)
 {

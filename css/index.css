@@ -93,7 +93,7 @@ body {
 .menu {
     /*width: use media query for this ;*/
     height: 100%;
-    background  : url("../assets/background2.png") no-repeat;
+    background  : url("../images/background2.png") no-repeat;
     background-size: 100% 100%;
     text-align: center;
 }

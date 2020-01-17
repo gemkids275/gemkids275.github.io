@@ -32,15 +32,8 @@ html, body {
 .m-t-10{
   margin-top: 10px;
 }
-.container {
-  width      : 1000px;
-  background : red;
-  height     : 100%;
-  margin     : auto;
-}
-
 .game {
-  background      : url("../assets/background2.png") no-repeat;
+  background      : url("../images/background2.png") no-repeat;
   background-size : 100% 100%;
   margin          : auto;
   padding         : 0px;
@@ -129,25 +122,25 @@ div.chicken {
   margin            : 1px;
   background-repeat : no-repeat;
   background-size   : contain;
-  background-image  : url("../assets/chicken_cartoon.png");
+  background-image  : url("../images/chicken_cartoon.png");
 }
 
 div.chick-1 {
-  background-image : url("../assets/phone1.png");
+  background-image : url("../images/phone1.png");
 }
 
 div.chick-2 {
-  background-image : url("../assets/phone1.png");
+  background-image : url("../images/phone1.png");
 }
 
 div.chick-3 {
-  background-image : url("../assets/phone2.png");
+  background-image : url("../images/phone2.png");
 }
 
 div.basket {
   width             : 150px;
   height            : 75px;
-  background-image  : url("../assets/mouse.png");
+  background-image  : url("../images/mouse.png");
   background-repeat : no-repeat;
   background-size   : contain;
   bottom            : 2.7%;
@@ -163,7 +156,7 @@ div.egg {
   background-size   : contain;
   /* background-color: yellow;*/
   background-repeat : no-repeat;
-  background-image  : url("../assets/egg_phone.png");
+  background-image  : url("../images/egg_phone.png");
 }
 
 div.score {
@@ -201,19 +194,19 @@ div.life {
 }
 
 div.life-1 {
-  background-image  : url("../assets/life-1.png");
+  background-image  : url("../images/life-1.png");
   width: 80px;
   height: 30px;
 }
 
 div.life-2 {
-  background-image  : url("../assets/life-2.png");
+  background-image  : url("../images/life-2.png");
   width: 70px;
   height: 42px;
 }
 
 div.life-3 {
-  background-image  : url("../assets/life-3.png");
+  background-image  : url("../images/life-3.png");
   width: 61px;
   height: 58px;
 }

@@ -4,30 +4,11 @@ $(document).ready(onLoad);
 // Create global object so jQuery doesn't have to
 // repeat the search for elements in the DOM
 var scope = {};
-//Event click button play
-$(document).on("click", "#play", function (e)
-{
-    let username  = $("#username").val();
-    let tel       = $("#tel").val();
-    let tel_regex = new RegExp("^\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4,5})$");
-    if (username == "")
-    {
-        alert("Bạn chưa nhập họ tên");
-    } else if (!tel_regex.test(tel))
-    {
-        alert("Số điện thoại không đúng định dạng");
-    } else
-    {
-        // start hatching eggs for all chicken divs
-        window.setTimeout(chickensStartHatch, 100);
-    }
-    e.preventDefault();
-});
-
 // begin jQuery execution
 function onLoad()
 {
     let i;
+    let phone = localStorage.getItem('phone');
     scope.previous_time = 0;
     scope.$container       = $("div.game");
     scope.$basket          = $("div.basket");
@@ -57,14 +38,51 @@ function onLoad()
     scope.parentRect       = $("div.game")[0].getBoundingClientRect();
     scope.parentRectLeft   = $("div.chick-1")[0].getBoundingClientRect().left;
     scope.parentRectRight  = $("div.chick-3")[0].getBoundingClientRect().right;
-    // scope.middleXPoint     = $("div.chick-2")[0].getBoundingClientRect().left + $("div.chick-2")[0].getBoundingClientRect().width / 2;
     //Set life
     for (i = 1; i <= scope.life; i++)
     {
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    window.setTimeout(chickensStartHatch, 100);
+    if(phone != null ) {
+        if(!phone.match(/^\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4,5})$/g)) {
+            $.confirm({
+                title: 'Chú ý !',
+                content: 'Số điện thoại không đúng định dạng!',
+                type: 'orange',
+                typeAnimated: true,
+                columnClass: 'col-md-5 col-sm-12',
+                buttons: {
+                    close: {
+                        text: 'OK',
+                        action : function () {
+                            localStorage.clear();
+                            backToHome();
+                        }
+                    }
+                }
+            });
+        } else {
+            window.setTimeout(chickensStartHatch, 100);
+        }
+    } else {
+        $.confirm({
+            title: 'Chú ý !',
+            content: 'Bạn chưa đăng nhập',
+            columnClass: 'col-md-5 col-sm-12',
+            type: 'orange',
+            typeAnimated: true,
+            buttons: {
+                close: {
+                    text: 'OK',
+                    action : function () {
+                        localStorage.clear();
+                        backToHome();
+                    }
+                }
+            }
+        });
+    }
 };
 //add mouse over event to move basket
 $("div.game").on("mousemove", function (e)
@@ -102,18 +120,6 @@ $("div.game").on("touchmove", function (e)
     }
 });
 
-function getOffset(el)
-{
-    const rect = el.getBoundingClientRect();
-    return {
-        left: rect.left + window.scrollX,
-        top : rect.top + window.scrollY
-    };
-}
-
-
-// this.startPos = chickens[Math.floor(Math.random()*4)].position()
-
 // select all 4 chicken divs
 function chickensStartHatch()
 {
@@ -123,17 +129,21 @@ function chickensStartHatch()
                                 // Lấy ngẫu nhiên 1 trong các div chicken để ấp trứng
                                 let random_index    = Math.floor(Math.random() * scope.$allChickens.length);
                                 let $eachChickenDiv = $(scope.$allChickens.splice(random_index, 1));
-                                // var $eachChickenDiv    =
-                                // $($(scope.$allChickens)[Math.floor(Math.random()*scope.$allChickens.length)]);
                                 // create object chicken object from Chicken class
                                 let $eachChickenObject = new Chicken($eachChickenDiv);
                                 // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
                                 window.setTimeout(function ()
                                                   {
                                                       $eachChickenObject.hatchEggs();
-                                                  }, (index + 1) * 3000
+                                                  }, (index + 1) * 2000
                                 );
                             });
 
+}
+
+function backToHome() {
+    let href                = window.location.href;
+    href                    = href.replace('game.', 'index.');
+    window.location.href    = href
 }
 

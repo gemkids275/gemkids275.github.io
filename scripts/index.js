@@ -20,17 +20,17 @@ function checkLogin (e) {
                         let name = this.$content.find('.name-input').val();
                         let phone = this.$content.find('.phone-input').val();
                         if(!name){
-                            $.alert('Yêu cầu nhập tên để chơi');
+                            $.alert('Bạn chưa nhập họ tên');
                             return false;
                         }
-                        if (!phone.match(/^[0-9]{10,11}$/g)) {
+                        if (!phone.match(/^\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4,5})$/g)) {
                             $.alert('Số điện thoại không đúng định dạng');
                             return false;
                         }
                         localStorage.setItem('phone', phone);
                         localStorage.setItem('name', name);
                         let href = window.location.href;
-                        href = href.replace('index.', 'game_pg_2.');
+                        href = href.replace('index.', 'game.');
                         window.location.href = href
                     }
                 },
@@ -54,7 +54,7 @@ function checkLogin (e) {
     }
     else {
         let href = window.location.href;
-        href = href.replace('index.', 'game_pg_2.');
+        href = href.replace('index.', 'game.');
         console.log(href);
         window.location.replace(href)
     }
