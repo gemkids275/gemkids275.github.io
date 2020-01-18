@@ -1,13 +1,12 @@
 // create Basket Class
 function Basket(){
-  this.divBasket = $('div.basket');
-  this.basketPosition = this.divBasket.position();
+  this.basketPosition = scope.$basket.position();
 
-  this.basketTop = this.basketPosition.top;
-  this.basketLeft = this.basketPosition.left;
+  this.basketTop      = this.basketPosition.top;
+  this.basketLeft     = this.basketPosition.left;
 
-  this.basketRight = this.basketLeft + this.divBasket.width();
-  this.basketBottom = this.basketTop + this.divBasket.height();
+  this.basketRight    = this.basketLeft + scope.$basket.width();
+  this.basketBottom   = this.basketTop + scope.$basket.height();
 }
 
 

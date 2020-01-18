@@ -8,8 +8,8 @@ var scope = {};
 function onLoad()
 {
     let i;
-    scope.user             = getStorage("user");
-    scope.user.score       = (scope.user.score == null)? 0: scope.user.score;
+    scope.user             = (getStorage("user") != null)?getStorage("user"): new Object();
+    scope.user.score       = (scope.user == null || scope.user.score == null)? 0: scope.user.score;
     scope.previous_time    = 0;
     scope.$container       = $("div.game");
     scope.$basket          = $("div.basket");
@@ -88,25 +88,12 @@ function onLoad()
 //add mouse over event to move basket
 $("div.game").on("mousemove", function (e)
 {
-    // if (e.pageX - scope.pointer_position > scope.parentRect.left+100 && e.pageX + scope.pointer_position <
-    //     scope.parentRect.right-100)
-    // {
-    //     scope.$basket.css("left", e.pageX - scope.pointer_position-scope.parentRect.left);
-    // }
-    // console.log(e.pageX,scope.parentRect.left,scope.pointer_position,e.pageX - scope.parentRect.left - scope.pointer_position);
     //Nếu con trỏ vượt qua mép trái or phải thì ko di chuyển giỏ
     if (e.pageX - scope.pointer_position + 50 >= scope.parentRectLeft && e.pageX + scope.pointer_position <=
         scope.parentRectRight + 50)
     {
         scope.$basket.css("left", e.pageX - scope.parentRect.left - scope.pointer_position);
     }
-    // else{
-    //     if(e.pageX - scope.pointer_position <= scope.parentRectLeft){
-    //         scope.$basket.css("left", scope.parentRectLeft-scope.parentRect.left - scope.pointer_position+10);
-    //     }else{
-    //         scope.$basket.css("left", scope.parentRectRight-scope.parentRect.left - scope.pointer_position-10)
-    //     }
-    // }
 });
 
 //add touchmove event to move basket on mobile
@@ -121,10 +108,9 @@ $("div.game").on("touchmove", function (e)
     }
 });
 
-// select all 4 chicken divs
+// select all chicken divs
 function chickensStartHatch()
 {
-    //use .each to execute function for each element in the array of chicken divs
     scope.$allChickens.each(function (index)
                             {
                                 // Lấy ngẫu nhiên 1 trong các div chicken để ấp trứng

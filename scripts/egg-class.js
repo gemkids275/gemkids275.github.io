@@ -8,9 +8,8 @@ function Egg($chickenDiv)
 
 
     // create div in memory to hold egg image
-    // set width, height and background via class egg in egg_style.css
     // set left and top position via input parameters
-    this.$eggImageDiv = $("<div></div>").attr("class", "egg").css({"left": this.startPosLeft,"top" : this.startPosTop});
+    this.$eggImageDiv = $("<div class='egg'></div>").css({"left": this.startPosLeft,"top" : this.startPosTop});
 
     $chickenDiv.append(this.$eggImageDiv);
     // calculate distance of egg fall by subtracting it's position from the window
@@ -132,8 +131,6 @@ function Egg($chickenDiv)
             });
         }
     };
-
-
 };
 
 
