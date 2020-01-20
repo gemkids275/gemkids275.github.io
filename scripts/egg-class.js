@@ -22,7 +22,6 @@ function Egg($chickenDiv)
     // this.breakEgg is a callback function that will called after
     // egg animation is complete
     let milliSeconds = (window.innerHeight*scope.speed - scope.level*500);
-    console.log(milliSeconds);
     // var milliSeconds = (2500 - scope.level*400);
 
     var eggObject = this;
@@ -34,7 +33,8 @@ function Egg($chickenDiv)
             duration: milliSeconds,
             easing : "linear",
             step : function( now, fx ) {
-                if(now>= fx.end*3/4 && start <2){
+                let time = (scope.level>3)?fx.end*0.9:fx.end*0.75;
+                if(now>= time && start <2){
                     chickensStartHatch();
                     start++;
                 }

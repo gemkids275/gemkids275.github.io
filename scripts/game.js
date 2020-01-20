@@ -134,26 +134,5 @@ function chickensStartHatch()
     let $eachChickenDiv = $(scope.$allChickens.splice(random_index, 1));
     // create object chicken object from Chicken class
     let $eachChickenObject = new Chicken($eachChickenDiv);
-    // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
     $eachChickenObject.hatchEggs();
-    // window.setTimeout(function ()
-    //                   {
-    //                       $eachChickenObject.hatchEggs();
-    //                   }, 2000
-    // );
-    // scope.$allChickens.each(function (index)
-    //                         {
-    //                             // Lấy ngẫu nhiên 1 trong các div chicken để ấp trứng
-    //                             let random_index    = Math.floor(Math.random() * scope.$allChickens.length);
-    //                             let $eachChickenDiv = $(scope.$allChickens.splice(random_index, 1));
-    //                             // create object chicken object from Chicken class
-    //                             let $eachChickenObject = new Chicken($eachChickenDiv);
-    //                             // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
-    //                             window.setTimeout(function ()
-    //                                               {
-    //                                                   $eachChickenObject.hatchEggs();
-    //                                               }, (index + 1) * 1500
-    //                             );
-    //                         });
-
 }
