@@ -45,6 +45,7 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
+    alert(CSS.supports("justify-content:space-around"));
     if(!CSS.supports("justify-content:space-around")){
         $.confirm({
                       title: 'Chú ý !',
