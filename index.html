@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-confirm.min.css">
+    <link rel="stylesheet" href="css/datatables.min.css">
     <link rel="stylesheet" href="css/index.css">
     <title>Mini game Tet</title>
 </head>
@@ -26,9 +27,55 @@
         </div>
     </div>
 </div>
+<div id="test">
+
+</div>
+<!-- Template -->
+<div id="new-player" class="dis-none">
+    <form action="" class="formName">
+    <div class="form-group">
+        <label>Họ và tên</label>
+        <input type="text" placeholder="Nhập tên" class="name-input form-control" required />
+        <label>Số điện thoại</label>
+        <input type="text" placeholder="Nhập số điện thoại" class="phone-input form-control" required />
+        </div>
+    </form>
+</div>
+<div id="score-board" class="dis-none">
+    <div class="table-responsive">
+        <table class="table display responsive nowrap table-striped table-hover table-score">
+            <thead>
+            <tr class="headings">
+                <th class="column-title title-index">STT </th>
+                <th class="column-title title-name">Tên người chơi </th>
+                <th class="column-title title-phone">Số điện thoại</th>
+                <th class="column-title title-score">Số điểm </th>
+                <th class="column-title title-time">Thời gian </th>
+            </tr>
+            </thead>
+            <!--Tbody-->
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="tmp-table" class="dis-none">
+    <table>
+        <tbody>
+        <tr>
+            <td class="index"></td>
+            <td class="name"></td>
+            <td class="phone"></td>
+            <td class="score"></td>
+            <td class="time"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 <script src="scripts/jquery/jquery-3.1.1.min.js"></script>
 <script src="scripts/jquery/jquery-confirm.min.js"></script>
+<script src="scripts/datatables.min.js"></script>
 <script src="scripts/common.js"></script>
 <script src="scripts/index.js"></script>
 <script>

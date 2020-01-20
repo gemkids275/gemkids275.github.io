@@ -85,6 +85,7 @@ function Egg($chickenDiv)
         {
             $("div.egg").remove();
             if(scope.score > parseInt(scope.user.score)){
+                scope.user.score = scope.score;
                 $.ajax({
                     headers: {
                         // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
