@@ -90,7 +90,6 @@ function checkLogin(e) {
                                                                 warning("Số điện thoại không đúng định dạng");
                                                                 return false;
                                                             }
-                                                            removeStorage("user"); // xóa user cũ
                                                             checkUser(name, phone);
                                                         }
                                                     },
@@ -210,7 +209,6 @@ function checkUser(name, phone) {
                    phone: phone
                },
                success: function success(data) {
-                   console.log(data);
                    if (data.success == true) {
                        if (data.user == null || (data.user != null && data.user.name == name)) {
                            let user = {};
@@ -221,7 +219,6 @@ function checkUser(name, phone) {
                        } else {
                            warning('Số điện thoại này đã đăng ký');
                        }
-                       ;
                    } else {
                        console.log('Error- ' + data.message);
                    }
