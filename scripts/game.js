@@ -45,9 +45,23 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    if(!CSS.supports(`(justify-content:space-around) or (justify-content:space-evenly) or (display:flex)`)){
-        warning("Trình duyệt của bạn không hỗ trợ hiệu ứng, đổi máy hoặc trình duyệt!");
-        redirectToHome();
+    if(!CSS.supports(`(justify-content:space-around) or (justify-content:space-evenly)`)){
+        $.confirm({
+                      title: 'Chú ý !',
+                      content: 'Trình duyệt của bạn không hỗ trợ hiệu ứng, cập nhập trình duyệt hoặc đổi trình duyệt',
+                      type: 'orange',
+                      typeAnimated: true,
+                      columnClass: 'col-md-5 col-sm-12',
+                      buttons: {
+                          close: {
+                              text: 'OK',
+                              action : function () {
+                                  localStorage.clear();
+                                  redirectToHome();
+                              }
+                          }
+                      }
+                  });
     }
 
     if(scope.user.phone != null ) {
