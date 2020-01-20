@@ -29,14 +29,18 @@ function Egg($chickenDiv)
 
     this.startFall = function ()
     {
-        this.$eggImageDiv.animate({top: this.distanceToBasket}, milliSeconds, "linear", this.catchEgg);
-        let $eachChickenObject = new Chicken($chickenDiv);
-        // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
-        window.setTimeout(function ()
-                          {
-                              $eachChickenObject.hatchEggs();
-                          }, milliSeconds+200
-        );
+        let start = 1;
+        this.$eggImageDiv.animate({top: this.distanceToBasket},{
+            duration: milliSeconds,
+            easing : "linear",
+            step : function( now, fx ) {
+                if(now>= fx.end*3/4 && start <2){
+                    chickensStartHatch();
+                    start++;
+                }
+            },
+            complete: this.catchEgg
+        });
     };
 
 
