@@ -45,6 +45,44 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
+
+    if(scope.user.phone == null ) {
+        $.confirm({
+                      title: 'Chú ý !',
+                      content: 'Bạn chưa đăng nhập',
+                      columnClass: 'col-md-5 col-sm-12',
+                      type: 'orange',
+                      typeAnimated: true,
+                      buttons: {
+                          close: {
+                              text: 'OK',
+                              action : function () {
+                                  localStorage.clear();
+                                  redirectToHome();
+                              }
+                          }
+                      }
+                  });
+
+    }
+    if(!scope.user.phone.match(/^[0-9]{10}$/g)) {
+        $.confirm({
+                      title: 'Chú ý !',
+                      content: 'Số điện thoại không đúng định dạng!',
+                      type: 'orange',
+                      typeAnimated: true,
+                      columnClass: 'col-md-5 col-sm-12',
+                      buttons: {
+                          close: {
+                              text: 'OK',
+                              action : function () {
+                                  localStorage.clear();
+                                  redirectToHome();
+                              }
+                          }
+                      }
+                  });
+    }
     if(!CSS.supports("justify-content:space-around")){
         $.confirm({
                       title: 'Chú ý !',
@@ -61,46 +99,8 @@ function onLoad()
                           }
                       }
                   });
-    }
-
-    if(scope.user.phone != null ) {
-        if(!scope.user.phone.match(/^[0-9]{10}$/g)) {
-            $.confirm({
-                title: 'Chú ý !',
-                content: 'Số điện thoại không đúng định dạng!',
-                type: 'orange',
-                typeAnimated: true,
-                columnClass: 'col-md-5 col-sm-12',
-                buttons: {
-                    close: {
-                        text: 'OK',
-                        action : function () {
-                            localStorage.clear();
-                            redirectToHome();
-                        }
-                    }
-                }
-            });
-        } else {
-            window.setTimeout(chickensStartHatch, 100);
-        }
     } else {
-        $.confirm({
-            title: 'Chú ý !',
-            content: 'Bạn chưa đăng nhập',
-            columnClass: 'col-md-5 col-sm-12',
-            type: 'orange',
-            typeAnimated: true,
-            buttons: {
-                close: {
-                    text: 'OK',
-                    action : function () {
-                        localStorage.clear();
-                        redirectToHome();
-                    }
-                }
-            }
-        });
+        window.setTimeout(chickensStartHatch, 100);
     }
 };
 //add mouse over event to move basket
