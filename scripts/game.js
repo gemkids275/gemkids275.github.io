@@ -45,10 +45,11 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    if(!CSS.supports('justify-content')||CSS.supports("display: flex")){
+    alert(CSS.supports('justify-content:space-around'));
+    if(!CSS.supports('justify-content')||!CSS.supports("display: flex")){
         alert("Trình duyệt của bạn ko hỗ trợ, xin hay đổi trình duyệt hoặc cập nhập");
     }
-    console.log(CSS.supports('display', 'flex'));
+    console.log(CSS.supports('justify-content:space-around'));
 
     if(scope.user.phone != null ) {
         if(!scope.user.phone.match(/^[0-9]{10}$/g)) {
