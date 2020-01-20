@@ -45,7 +45,7 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    if(!CSS.supports('display', 'flex')){
+    if(!CSS.supports('justify-content', 'space-around')||!CSS.supports('justify-content', 'space-evenly')){
         alert("Trình duyệt của bạn ko hỗ trợ, xin hay đổi trình duyệt hoặc cập nhập");
     }
     console.log(CSS.supports('display', 'flex'));
