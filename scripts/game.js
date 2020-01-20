@@ -56,7 +56,6 @@ function onLoad()
                           close: {
                               text: 'OK',
                               action : function () {
-                                  localStorage.clear();
                                   redirectToHome();
                               }
                           }
