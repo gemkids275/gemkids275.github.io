@@ -45,7 +45,7 @@ function onLoad()
         let life = $(scope.$life).addClass("life-" + i);
         $(scope.$lifeContainer).append($(life));
     }
-    if(!CSS.supports(`(justify-content:space-around) or (justify-content:space-evenly)`)){
+    if(!CSS.supports("justify-content:space-around")){
         $.confirm({
                       title: 'Chú ý !',
                       content: 'Trình duyệt của bạn không hỗ trợ hiệu ứng, cập nhập trình duyệt hoặc đổi trình duyệt',
