@@ -140,7 +140,7 @@ function chickensStartHatch()
                                 window.setTimeout(function ()
                                                   {
                                                       $eachChickenObject.hatchEggs();
-                                                  }, (index + 1) * 2000
+                                                  }, (index + 1) * 1500
                                 );
                             });
 

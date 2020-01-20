@@ -22,6 +22,7 @@ function Egg($chickenDiv)
     // this.breakEgg is a callback function that will called after
     // egg animation is complete
     let milliSeconds = (window.innerHeight*scope.speed - scope.level*500);
+    console.log(milliSeconds);
     // var milliSeconds = (2500 - scope.level*400);
 
     var eggObject = this;
@@ -29,6 +30,13 @@ function Egg($chickenDiv)
     this.startFall = function ()
     {
         this.$eggImageDiv.animate({top: this.distanceToBasket}, milliSeconds, "linear", this.catchEgg);
+        let $eachChickenObject = new Chicken($chickenDiv);
+        // Sau (random_index+1)*2 giây hàm ấp trứng sẽ thực hiện
+        window.setTimeout(function ()
+                          {
+                              $eachChickenObject.hatchEggs();
+                          }, milliSeconds+200
+        );
     };
 
 
