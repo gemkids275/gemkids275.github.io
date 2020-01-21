@@ -217,20 +217,23 @@ table th {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .table-score th{
+        text-align: left;
+    }
     .title-name{
-        width : 160px;
+        width : 160px !important;
     }
     .title-phone{
-        width : 160px;
+        width : 160px !important;
     }
     .title-index{
-        width : 40px;
+        width : 40px !important;
     }
     .title-score{
-        width : 80px;
+        width : 80px !important;
     }
     .title-time{
-        width: 180px;
+        width: 180px !important;
     }
 
     table td::before {
