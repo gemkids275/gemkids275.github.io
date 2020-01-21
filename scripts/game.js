@@ -8,7 +8,15 @@ var scope = {};
 function onLoad()
 {
     let i;
-    scope.user             = (getStorage("user") != null)?getStorage("user"): new Object();
+    scope.user             = (getStorage("user") != null)?getStorage("user"): {};
+    if(scope.user != null && scope.user.score != null){
+         if (getStartTime() > scope.user.date){
+             scope.user.date = getStartTime();
+             scope.user.score = 0;
+         }
+    } else {
+        scope.user.score = 0;
+    }
     scope.user.score       = (scope.user == null || scope.user.score == null)? 0: scope.user.score;
     scope.previous_time    = 0;
     scope.$container       = $("div.game");

@@ -1,3 +1,9 @@
+function getStartTime() {
+    let date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date.getTime();
+}
+
 function redirectToGame() {
     let href                = window.location.href;
     href                    = href.replace('index.', 'game.');

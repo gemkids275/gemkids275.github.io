@@ -248,3 +248,48 @@ table th {
         border-bottom: 0;
     }
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .menu-item {
+        font-size: 12px
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .menu-item {
+        font-size: 14px
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .menu-item {
+        font-size: 14px
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .menu-item {
+        font-size: 14px
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .menu-item {
+        font-size: 14px
+    }
+}
+
+.paragraph {
+    margin-bottom: 10px;
+}
+.sentence {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

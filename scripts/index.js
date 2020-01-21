@@ -148,7 +148,7 @@ function getScoreboardToday() {
                      });
                  },
                  contentLoaded : function (data, status, xhr) {
-                     console.log(data)
+                     // console.log(data)
                  },
                  onContentReady: function () {
                      this.$content.find(".table-score").dataTable(dataTableOption);
@@ -189,7 +189,7 @@ function getScoreboardAllTime() {
                      });
                  },
                  contentLoaded : function (data, status, xhr) {
-                     console.log(data)
+                     // console.log(data)
                  },
                  onContentReady: function () {
                      // console.log("Content ready!")
@@ -214,6 +214,7 @@ function checkUser(name, phone) {
                            let user = {};
                            user.username = name;
                            user.phone = phone;
+                           user.date = getStartTime();
                            setStorage("user", user);
                            redirectToGame();
                        } else {
@@ -227,4 +228,40 @@ function checkUser(name, phone) {
                    console.log('Error ' + xhr.status + ' | ' + thrownError);
                }
            });
+}
+
+function showHowToPlay() {
+    $.confirm({
+        title: 'Cách chơi',
+        content: 'url:guide.html',
+        type: 'red',
+        animation: 'scale',
+        closeAnimation: 'scale',
+        backgroundDismiss: true,
+        columnClass: 'col-md-12 col-lg-6 col-xs-12',
+        buttons: {
+            cancel: {
+                text: 'OK',
+                btnClass: 'btn-red'
+            }
+        }
+    });
+}
+
+function showReward() {
+    $.confirm({
+        title: 'Cơ cấu giải thưởng',
+        content: 'url:reward.html',
+        type: 'red',
+        animation: 'scale',
+        closeAnimation: 'scale',
+        backgroundDismiss: true,
+        columnClass: 'col-md-12 col-lg-6 col-xs-12',
+        buttons: {
+            cancel: {
+                text: 'OK',
+                btnClass: 'btn-red'
+            }
+        }
+    });
 }
